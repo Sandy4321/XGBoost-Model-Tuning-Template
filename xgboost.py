@@ -80,6 +80,10 @@ param['objective'] = 'multi:softprob'
 eval_metric = "mlogloss"
 param = {'max_depth': 8, 'eta': 0.01, 'subsample': 0.6,
          'objective': objective, 'eval_metric': eval_metric, 'num_class': 9, 'silent': 0}
+
+# Since the turned out number of rounds is based on 4/5 dataset
+# the best number of rounds for the whole dataset should be larger.
+# I would multiply the epochs with 5/4 to get the more accurate number of rounds.
 bst = xgb.train(param, dtrain, 2626)
 
 yprob = bst.predict(dtest)
